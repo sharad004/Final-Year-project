@@ -1,43 +1,3 @@
-# from flask import Flask, request, jsonify
-# from flask_cors import CORS
-# import pickle
-
-# app = Flask(__name__)
-# CORS(app)
-
-# # Load the logistic regression model
-# with open("logistic_model.pkl", "rb") as f:
-#     model = pickle.load(f)
-
-# # Load the TF-IDF vectorizer
-# with open("tfidf_vectorizer.pkl", "rb") as f:  # updated filename
-#     tfidf = pickle.load(f)
-
-
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     data = request.get_json()
-#     text = data.get('news', '')
-
-#     if not text:
-#         return jsonify({'error': 'No text provided'}), 400
-
-#     X_new = tfidf.transform([text])
-#     pred = model.predict(X_new)[0]
-#     pred_proba = model.predict_proba(X_new)[0].max()
-
-   
-#     return jsonify({
-#         'prediction': int(pred),        # 1=Real, 0=Fake
-#         'probability': float(pred_proba)
-#     })
-
-
-
-
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
 
 
 from flask import Flask, request, jsonify
@@ -50,15 +10,15 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-# Load the logistic regression model
+
 with open("logistic_model.pkl", "rb") as f:
     model = pickle.load(f)
 
-# Load the TF-IDF vectorizer
+
 with open("tfidf_vectorizer.pkl", "rb") as f:
     tfidf = pickle.load(f)
 
-#MongoDB Setup
+
 client = MongoClient("mongodb://localhost:27017/")  
 db = client["fake_news_db"]  
 collection = db["submissions"]  
@@ -73,12 +33,12 @@ def predict():
     if not text:
         return jsonify({'error': 'No text provided'}), 400
 
-    # Predict
+   
     X_new = tfidf.transform([text])
     pred = model.predict(X_new)[0]
     pred_proba = model.predict_proba(X_new)[0].max()
 
-    # Save to database
+    
     submission = {
         "title": title,
         "content": text,
@@ -94,7 +54,7 @@ def predict():
     })
 
 
-#Admin Route: Fetch all submissions
+#Admin Route to fetch submission
 @app.route('/admin/submissions', methods=['GET'])
 def admin_get_submissions():
     #id rakhne

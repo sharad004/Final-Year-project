@@ -4,7 +4,7 @@ from scipy.sparse import csr_matrix
 
 class LogisticRegressionFromScratchSparse:
     
-    # optimized for sparse TF-IDF matrices. Uses mini-batch gradient descent and sparse-friendly operations.
+    # optimized for sparse TF-IDF matrices , mini batch gradient use garera
 
     def __init__(self, learning_rate=0.1, epochs=100, batch_size=256, verbose=True):
         self.learning_rate = learning_rate
@@ -55,7 +55,7 @@ class LogisticRegressionFromScratchSparse:
                 self.weights -= self.learning_rate * dw
                 self.bias -= self.learning_rate * db
 
-            # Optional: print loss every 10 epochs
+            # print loss every 10 epochs
             if self.verbose and (epoch % 10 == 0 or epoch == self.epochs-1):
                 linear_model_full = X.dot(self.weights) + self.bias
                 y_pred_full = self.sigmoid(linear_model_full)

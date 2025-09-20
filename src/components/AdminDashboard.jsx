@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-  // Fetch all submissions from backend
+  
   const fetchSubmissions = async () => {
     try {
       const response = await fetch('http://localhost:5000/admin/submissions');
@@ -21,26 +22,17 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchSubmissions();
   }, []);
-  const handleAdd=async()=>{
-    try{
-       navigate('/fake-news-detection')
-    }
-    catch(e){
-        console.log(e)
-    }
-  }
 
-  // Delete a submission
+  const handleAdd = () => navigate('/fake-news-detection');
+
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this submission?')) return;
-
     try {
       const response = await fetch(`http://localhost:5000/admin/delete/${id}`, {
         method: 'DELETE',
       });
       const data = await response.json();
       if (response.ok) {
-        // Remove deleted submission from state
         setSubmissions(submissions.filter(sub => sub._id !== id));
         alert(data.message);
       } else {
@@ -51,15 +43,15 @@ const AdminDashboard = () => {
     }
   };
 
-  if (loading) return <div>Loading submissions...</div>;
+  if (loading) return <div className="admin-loading">Loading submissions...</div>;
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Admin Dashboard</h1>
+    <div className="admin-container">
+      <h1 className="admin-title">Admin Dashboard</h1>
       {submissions.length === 0 ? (
-        <p>No submissions found.</p>
+        <p className="admin-empty">No submissions found.</p>
       ) : (
-        <table border="1" cellPadding="10" cellSpacing="0">
+        <table className="admin-table">
           <thead>
             <tr>
               <th>Title</th>
@@ -79,9 +71,12 @@ const AdminDashboard = () => {
                 <td>{(sub.probability * 100).toFixed(2)}%</td>
                 <td>{new Date(sub.timestamp).toLocaleString()}</td>
                 <td>
-                  <button onClick={() => handleDelete(sub._id)}>Delete</button>
-                  <button onClick={() => handleAdd()}>Add</button>
-                </td>
+                  <div className="admin-actions">
+                  <button className="admin-btn delete" onClick={() => handleDelete(sub._id)}>Delete</button>
+                  <button className="admin-btn add" onClick={handleAdd}>Add</button>
+                </div>
+              </td>
+
               </tr>
             ))}
           </tbody>

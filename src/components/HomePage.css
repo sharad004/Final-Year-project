@@ -1,4 +1,4 @@
-/* Base Styles */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -39,7 +39,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-left: auto; /* Pushes controls to far right */
+  margin-left: auto; 
 }
 
 .search-input {
@@ -48,8 +48,8 @@ a {
   border: none;
   font-size: 1rem;
   width: 200px;
-  background-color: #fff; /* Optional: to differentiate input */
-  color: #000; /* Optional: input text color */
+  background-color: #fff; 
+  color: #000; 
 }
 
 .theme-toggle {

@@ -58,12 +58,12 @@ with open("logistic_model.pkl", "rb") as f:
 with open("tfidf_vectorizer.pkl", "rb") as f:
     tfidf = pickle.load(f)
 
-# --- MongoDB Setup ---
-client = MongoClient("mongodb://localhost:27017/")  # Replace with your MongoDB URI if using Atlas
-db = client["fake_news_db"]  # Database name
-collection = db["submissions"]  # Collection name
+#MongoDB Setup
+client = MongoClient("mongodb://localhost:27017/")  
+db = client["fake_news_db"]  
+collection = db["submissions"]  
 
-# --- Prediction Route ---
+#Prediction Route 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
@@ -78,7 +78,7 @@ def predict():
     pred = model.predict(X_new)[0]
     pred_proba = model.predict_proba(X_new)[0].max()
 
-    # Save to MongoDB
+    # Save to database
     submission = {
         "title": title,
         "content": text,
@@ -94,18 +94,18 @@ def predict():
     })
 
 
-# --- Admin Route: Fetch all submissions ---
+#Admin Route: Fetch all submissions
 @app.route('/admin/submissions', methods=['GET'])
 def admin_get_submissions():
-    # Include _id so we can delete later
+    #id rakhne
     submissions = list(collection.find({}))
-    # Convert ObjectId to string for JSON serialization
+    #Convert ObjectId to string for JSON serialization
     for sub in submissions:
         sub['_id'] = str(sub['_id'])
     return jsonify(submissions)
 
 
-# --- Admin Route: Delete a submission by _id ---
+#Admin Route
 @app.route('/admin/delete/<submission_id>', methods=['DELETE'])
 def admin_delete_submission(submission_id):
     try:

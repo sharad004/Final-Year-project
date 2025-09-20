@@ -1,0 +1,99 @@
+ /*page container*/
+.admin-container {
+  padding: 2rem;
+  color: #f5f5f5;
+  background-color: #1c1e26;
+  min-height: 100vh;
+}
+
+
+.admin-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #00d1b2;
+}
+
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2c2f36;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.8rem 1rem;
+  border: 1px solid #444;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background-color: #343a40;
+  color: #00d1b2;
+  font-weight: bold;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #2c2f36;
+}
+
+.admin-table tr:nth-child(odd) {
+  background-color: #353b48;
+}
+
+.admin-table tr:hover {
+  background-color: #444d56;
+}
+
+
+.admin-actions {
+  display: flex;
+  gap: 0.6rem;   
+}
+
+
+.admin-btn {
+  min-width: 90px;              
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.admin-btn.delete {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.admin-btn.delete:hover {
+  background-color: #e63939;
+  transform: scale(1.05);
+}
+
+.admin-btn.add {
+  background-color: #00d1b2;
+  color: #fff;
+}
+
+.admin-btn.add:hover {
+  background-color: #1abc9c;
+  transform: scale(1.05);
+}
+
+
+.admin-empty,
+.admin-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b3b3b3;
+  margin-top: 2rem;
+}

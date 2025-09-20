@@ -50,7 +50,7 @@ const HomePage = () => {
             url: article.url || "#",
           }));
 
-          // Remove duplicates by title + excerpt
+          // Removing duplicates by title + excerpt
 formattedArticles = formattedArticles.filter(
   (article, index, self) =>
     index ===
@@ -73,13 +73,13 @@ formattedArticles = formattedArticles.filter(
     fetchNews();
   }, [activeCategory]);
 
-  // Remove duplicates again before filtering (extra safety)
+  // Remove duplicates again before filtering 
   const uniqueArticles = articles.filter(
     (article, index, self) =>
       index === self.findIndex((a) => a.url === article.url)
   );
 
-  // Apply search filter
+  // search filter
   const filtered = uniqueArticles.filter((a) => {
     const bySearch =
       a.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
